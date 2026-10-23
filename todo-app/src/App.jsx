@@ -48,10 +48,33 @@ function App() {
 
   const remaining = tasks.filter((t) => !t.done).length
 
+  const total = tasks.length
+  const done = tasks.filter((t) => t.done).length
+  const progress = total === 0 ? 0 : Math.round((done / total) * 100)
+
   return (
     <div className="container">
-      <h1>📝 To-Do List</h1>
-      <p className="subtitle">{dateLabel}</p>
+      {/* Header */}
+      <div className="header">
+        <div className="header-top">
+          <div className="header-icon">📝</div>
+          <h1>My To-Dos</h1>
+        </div>
+        <p className="subtitle">{dateLabel}</p>
+
+        {/* Progress bar */}
+        {total > 0 && (
+          <div className="progress-wrap">
+            <div className="progress-meta">
+              <span>{done} of {total} completed</span>
+              <span>{progress}%</span>
+            </div>
+            <div className="progress-track">
+              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+        )}
+      </div>
 
       <AddTaskInput onAdd={addTask} />
 
@@ -65,8 +88,8 @@ function App() {
       />
 
       <div className="footer">
-        <span>
-          {remaining} task{remaining !== 1 ? 's' : ''} left
+        <span className="footer-count">
+          <strong>{remaining}</strong> task{remaining !== 1 ? 's' : ''} left
         </span>
         <button className="clear-btn" onClick={clearDone}>
           Clear completed
