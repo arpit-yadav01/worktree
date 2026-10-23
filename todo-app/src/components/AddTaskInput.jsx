@@ -22,7 +22,7 @@ function AddTaskInput({ onAdd }) {
         placeholder="Add a new task..."
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleAdd}>＋</button>
+      <button className="add-btn" onClick={handleAdd} aria-label="Add task">＋</button>
     </div>
   )
 }
